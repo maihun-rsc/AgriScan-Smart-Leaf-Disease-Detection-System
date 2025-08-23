@@ -6,7 +6,7 @@
 
 ## Proposed Datasets to be used
 
-1. **Tomato Plant Leaf Dataset:** [Kaggle](https://www.kaggle.com/datasets/ashishmotwani/tomato)
+1. **Plant Disease Dataset:** [Kaggle](https://www.kaggle.com/datasets/ashishmotwani/tomato)
 2. 
 
 ---
