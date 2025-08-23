@@ -3,8 +3,7 @@ AgriScan : Smart Leaf Disease Detection System is a project created for farmer w
 
 **Proposed Datasets to be used**
 
-1. **Tomato Plant Leaf Dataset:**
-   *Dataset Link:* [Kaggle (https://www.kaggle.com/datasets/ashishmotwani/tomato) ]
+1. **Tomato Plant Leaf Dataset:** [Kaggle]
 
 **Project By:**
 
