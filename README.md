@@ -10,15 +10,3 @@
 2. 
 
 ---
-
-## 📧 Project Created By:
-
-1. **Abhinav Mehra - 23BCY10015**
-2. **Himanshu Gaur - 23BCY10127**
-3. **Tanya Bharti - 23BCE11555**
-4. **Supreety Jha - 23BCY10150**
-5. **Rananjay Singh Chauhan - 23BAI10080**
-
-under the supervision of **Dr. Palas Mandal** for the fulfillment of **DSN3099 - EPICS**.
-
----
