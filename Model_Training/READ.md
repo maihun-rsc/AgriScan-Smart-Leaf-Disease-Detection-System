@@ -28,3 +28,16 @@ transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 ])
+```
+
+Dataset/
+├── train/
+│   ├── Healthy/
+│   ├── Late_blight/
+│   ├── Septoria_leaf_spot/
+│   ├── Leaf_Mold/
+├── valid/
+│   ├── Healthy/
+│   ├── Late_blight/
+│   ├── Septoria_leaf_spot/
+│   ├── Leaf_Mold/
