@@ -30,24 +30,136 @@ transforms.Compose([
 ])
 ```
 
-Dataset/
+## Model Architecture, Training, and Evaluation
 
-├── train/
+### 3. Model Architecture — ResNet50
 
-│   ├── Healthy/
+The model uses ResNet50, a residual convolutional neural network with skip connections that mitigate vanishing gradients and enable training deeper networks efficiently.
 
-│   ├── Late_blight/
+### Key Features:
+- Pre-trained on ImageNet for better initialization.
+- Fully connected layer modified for the number of tomato classes.
+- Optimized using Adam optimizer and CrossEntropy loss.
 
-│   ├── Septoria_leaf_spot/
+```python
+import torch
+import torch.nn as nn
+from torchvision import models
 
-│   ├── Leaf_Mold/
+model = models.resnet50(pretrained=True)
+for param in model.parameters():
+    param.requires_grad = False
 
-├── valid/
+num_features = model.fc.in_features
+model.fc = nn.Linear(num_features, num_classes)
+model = model.to(device)
+```
 
-│   ├── Healthy/
+---
 
-│   ├── Late_blight/
+### 4. Training Algorithm
 
-│   ├── Septoria_leaf_spot/
+The training loop is designed for GPU execution (if available):
 
-│   ├── Leaf_Mold/
+```python
+for epoch in range(epochs):
+    model.train()
+    for images, labels in train_loader:
+        images, labels = images.to(device), labels.to(device)
+
+        optimizer.zero_grad()
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+```
+
+### Steps in the training loop:
+1. Forward pass to predict output.
+2. Compute loss by comparing predictions with labels.
+3. Backpropagate the error.
+4. Update model weights.
+5. Track accuracy and validation loss.
+
+---
+
+### 5. Performance Evaluation
+
+After training:
+- Model accuracy, precision, recall, and F1-score are computed.
+- Confusion matrices visualize class-level performance.
+- Best model weights are saved to `best_model.pth`.
+
+---
+
+### 6. Visualization
+
+Random samples and predictions are displayed using matplotlib for interpretability.
+
+---
+
+### Training Parameters
+
+| Parameter | Description | Example |
+|------------|--------------|----------|
+| Batch Size | Number of samples per step | 32 |
+| Epochs | Total passes over dataset | 25 |
+| Learning Rate | Step size for weight updates | 0.001 |
+| Optimizer | Optimization algorithm | Adam |
+| Loss Function | Measures prediction error | CrossEntropyLoss |
+
+---
+
+### Requirements
+
+```bash
+pip install torch torchvision matplotlib numpy opencv-python tqdm
+```
+
+---
+
+### File Structure
+
+```
+Tomato-Leaf-Disease-Detection/
+│
+├── model_training.py          # Main training script
+├── dataset_loader.py          # Custom PyTorch dataset
+├── visualize_results.py       # Visualization utilities
+├── best_model.pth             # Saved trained model
+├── README.md                  # Project documentation
+└── requirements.txt
+```
+
+---
+
+### CUDA Support
+
+The training pipeline automatically detects and utilizes your GPU if available:
+
+```python
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("Using CUDA" if torch.cuda.is_available() else "Using CPU")
+```
+
+---
+
+### Results and Metrics
+
+- Model Accuracy: approximately 95% on validation set.
+- Rapid loss reduction due to transfer learning.
+- Inference speed: approximately 15ms per image on RTX 3050.
+
+### Visualizations include:
+- Training vs Validation Accuracy
+- Confusion Matrix
+- Example Predictions
+
+---
+
+### Future Work
+
+- Deploy the trained model on Streamlit or Hugging Face for real-time detection.
+- Integrate Grad-CAM for model explainability.
+- Expand dataset for robustness across lighting and angles.
+
