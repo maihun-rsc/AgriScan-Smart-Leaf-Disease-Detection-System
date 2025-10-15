@@ -157,9 +157,5 @@ print("Using CUDA" if torch.cuda.is_available() else "Using CPU")
 
 ---
 
-### Future Work
 
-- Deploy the trained model on Streamlit or Hugging Face for real-time detection.
-- Integrate Grad-CAM for model explainability.
-- Expand dataset for robustness across lighting and angles.
 
